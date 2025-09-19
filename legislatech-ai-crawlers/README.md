@@ -42,6 +42,7 @@ O **SANDOVAL AI Crawlers** é um sistema modular de web scraping especializado n
 - **ANTT**: Agência Nacional de Transportes Terrestres
 - **BCB**: Banco Central do Brasil
 - **ANA**: Agência Nacional de Águas
+- **Biblioteca ANEEL**: Coleta e exportação de acervo normativo da ANEEL
 
 ### 📚 Códigos e Estatutos
 - **Código de Defesa do Consumidor**: Lei 8.078/1990
@@ -83,6 +84,7 @@ sandoval-ai/
 │   ├── decretos-emendas/       # Crawler de Decretos e Emendas
 │   ├── medidas-provisorias/    # Crawler de Medidas Provisórias
 │   ├── antt/                   # Crawler da ANTT
+│   ├── aneel-biblioteca/       # Exportador da Biblioteca ANEEL
 │   ├── bcb/                    # Crawler do BCB
 │   ├── codigo-consumidor/      # Crawler do CDC
 │   ├── historico-codigos/      # Crawler de códigos históricos
