@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Força arquivos .txt (ex.: requirements) a serem tratados como texto
+*.txt text eol=lf diff
