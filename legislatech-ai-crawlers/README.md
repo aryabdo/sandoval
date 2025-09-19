@@ -1,4 +1,4 @@
-# Legislatech AI Crawlers
+# SANDOVAL AI Crawlers
 
 [![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![Playwright](https://img.shields.io/badge/Playwright-Automation-green.svg)](https://playwright.dev/)
@@ -6,11 +6,11 @@
 [![Spacy](https://img.shields.io/badge/Spacy-NLP-purple.svg)](https://spacy.io/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 
-> **Sistema de crawlers especializados para coleta automatizada de legislação brasileira** - Desenvolvido com Playwright, BeautifulSoup e IA
+> **Sistema de crawlers especializados para coleta automatizada de legislação brasileira** - Desenvolvido pela **AASN** com Playwright, BeautifulSoup e IA
 
 ## 🚀 Sobre o Projeto
 
-O **Legislatech AI Crawlers** é um sistema modular de web scraping especializado na coleta automatizada de legislação brasileira. Utilizando tecnologias avançadas de automação web e processamento de linguagem natural, extraímos, processamos e estruturamos dados legislativos de fontes oficiais.
+O **SANDOVAL AI Crawlers** é um sistema modular de web scraping especializado na coleta automatizada de legislação brasileira. Utilizando tecnologias avançadas de automação web e processamento de linguagem natural, extraímos, processamos e estruturamos dados legislativos de fontes oficiais.
 
 ### 🎯 Objetivos
 
@@ -56,13 +56,13 @@ O **Legislatech AI Crawlers** é um sistema modular de web scraping especializad
 
 ## 🏗️ Arquitetura
 
-### Visão Geral do Sistema Legislatech AI
+### Visão Geral do Sistema SANDOVAL AI
 
-O **Legislatech AI** é um ecossistema completo de inteligência artificial para análise de legislação brasileira, composto por três módulos principais:
+O **SANDOVAL AI** é um ecossistema completo de inteligência artificial para análise de legislação brasileira, composto por três módulos principais:
 
 ```
-legislatech-ai/
-├── legislatech-ai-api/           # API REST com FastAPI
+sandoval-ai/
+├── sandoval-ai-api/           # API REST com FastAPI
 │   ├── routes/                  # Endpoints organizados por versão
 │   │   ├── v1.py               # RAG Search com reranking
 │   │   ├── v2.py               # Intent Router
@@ -78,7 +78,7 @@ legislatech-ai/
 │   ├── requirements.txt        # Dependências Python
 │   ├── Dockerfile             # Containerização
 │   └── README.md              # Documentação da API
-├── legislatech-ai-crawlers/     # Sistema de Crawlers
+├── sandoval-ai-crawlers/     # Sistema de Crawlers
 │   ├── leis-ordinarias/        # Crawler de Leis Ordinárias
 │   ├── decretos-emendas/       # Crawler de Decretos e Emendas
 │   ├── medidas-provisorias/    # Crawler de Medidas Provisórias
@@ -237,8 +237,8 @@ Os crawlers alimentam a API através de:
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/legislatech-ai.git
-cd legislatech-ai/legislatech-ai-crawlers
+git clone https://github.com/seu-usuario/sandoval-ai.git
+cd sandoval-ai/sandoval-ai-crawlers
 ```
 
 ### 2. Configure o ambiente
@@ -260,7 +260,7 @@ Crie um arquivo `.env` em cada crawler:
 OPENAI_API_KEY=sk-your-openai-api-key-here
 
 # === Configurações do Banco de Dados ===
-DATABASE_URL=postgresql://usuario:senha@localhost:5432/legislatech
+DATABASE_URL=postgresql://usuario:senha@localhost:65432/sandoval
 
 # === Configurações do Crawler ===
 WORKERS=10
@@ -318,12 +318,12 @@ python main.py
 #### Build da imagem
 ```bash
 cd leis-ordinarias
-docker build -t legislatech-crawler-leis .
+docker build -t sandoval-crawler-leis .
 ```
 
 #### Execução
 ```bash
-docker run --env-file .env legislatech-crawler-leis
+docker run --env-file .env sandoval-crawler-leis
 ```
 
 ### Execução Paralela
@@ -612,9 +612,9 @@ services:
 ### Agendamento com Cron
 ```bash
 # Adicione ao crontab
-0 2 * * * cd /path/to/legislatech-ai-crawlers/leis-ordinarias && python main.py
-0 3 * * * cd /path/to/legislatech-ai-crawlers/decretos-emendas && python main.py
-0 4 * * * cd /path/to/legislatech-ai-crawlers/medidas-provisorias && python main.py
+0 2 * * * cd /path/to/sandoval-ai-crawlers/leis-ordinarias && python main.py
+0 3 * * * cd /path/to/sandoval-ai-crawlers/decretos-emendas && python main.py
+0 4 * * * cd /path/to/sandoval-ai-crawlers/medidas-provisorias && python main.py
 ```
 
 ### Monitoramento
@@ -691,10 +691,10 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](../LICENSE) para
 ## 🆘 Suporte
 
 ### Canais de Ajuda
-- **Documentação**: [docs.legisla.tech/crawlers](https://docs.legisla.tech/crawlers)
-- **Email**: suporte@legisla.tech
-- **Issues**: [GitHub Issues](https://github.com/seu-usuario/legislatech-ai/issues)
-- **Discord**: [Comunidade Legislatech](https://discord.gg/legislatech)
+- **Documentação**: [docs.sandoval.ai/crawlers](https://docs.sandoval.ai/crawlers)
+- **Email**: suporte@sandoval.ai
+- **Issues**: [GitHub Issues](https://github.com/seu-usuario/sandoval-ai/issues)
+- **Discord**: [Comunidade SANDOVAL](https://discord.gg/sandoval)
 
 ### FAQ
 
@@ -712,7 +712,7 @@ A: Configure agendamento automático com cron ou Docker.
 
 ---
 
-**Desenvolvido com ❤️ pela equipe Legislatech**
+**Desenvolvido com ❤️ pela AASN**
 
 *Automatizando a coleta de legislação brasileira com inteligência artificial.*
 
@@ -720,7 +720,7 @@ A: Configure agendamento automático com cron ou Docker.
 
 ```python
 # Análise de grafo de uma lei específica
-response = requests.get("http://localhost:8000/grafo/", params={
+response = requests.get("http://localhost:68000/grafo/", params={
     "urls": "https://www.planalto.gov.br/ccivil_03/leis/l8078.htm",
     "profundidade": 2,
     "top_n": 20

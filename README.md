@@ -1,4 +1,4 @@
-# Legislatech AI
+# SANDOVAL AI
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -7,11 +7,11 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-blue.svg)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 
-> **Repositório oficial do [https://legisla.tech/ai](https://legisla.tech/ai)** - Plataforma de IA para análise inteligente da legislação brasileira
+> **Repositório oficial do [https://sandoval.ai](https://sandoval.ai)** - Plataforma de IA para análise inteligente da legislação brasileira desenvolvida pela **AASN**
 
 ## 📖 Sobre o Projeto
 
-O **Legislatech AI** é uma plataforma de inteligência artificial especializada em análise e busca de legislação brasileira. Utilizando tecnologias avançadas de processamento de linguagem natural e machine learning, oferecemos soluções inteligentes para navegar, compreender e extrair insights da complexa legislação brasileira.
+O **SANDOVAL AI** é uma plataforma de inteligência artificial especializada em análise e busca de legislação brasileira. Utilizando tecnologias avançadas de processamento de linguagem natural e machine learning, oferecemos soluções inteligentes para navegar, compreender e extrair insights da complexa legislação brasileira.
 
 ### 🎯 Objetivos
 
@@ -34,8 +34,8 @@ O **Legislatech AI** é uma plataforma de inteligência artificial especializada
 O projeto está organizado em módulos especializados com arquitetura moderna:
 
 ```
-legislatech-ai/
-├── legislatech-ai-api/     # API REST com FastAPI
+sandoval-ai/
+├── sandoval-ai-api/     # API REST com FastAPI
 │   ├── routes/            # Endpoints organizados por versão
 │   │   ├── v1.py         # RAG Search com reranking
 │   │   ├── v2.py         # Intent Router
@@ -70,13 +70,13 @@ legislatech-ai/
 
 1. **Clone o repositório**
    ```bash
-   git clone https://github.com/seu-usuario/legislatech-ai.git
-   cd legislatech-ai
+   git clone https://github.com/seu-usuario/sandoval-ai.git
+   cd sandoval-ai
    ```
 
 2. **Configure a API**
    ```bash
-   cd legislatech-ai-api
+   cd sandoval-ai-api
    python -m venv venv
    source venv/bin/activate  # Linux/Mac
    # ou venv\Scripts\activate  # Windows
@@ -92,16 +92,16 @@ legislatech-ai/
 
 4. **Execute a aplicação**
    ```bash
-   uvicorn main:app --reload --host 0.0.0.0 --port 8000
+   uvicorn main:app --reload --host 0.0.0.0 --port 68000
    ```
 
 #### Opção 2: Com Docker
 
 ```bash
-git clone https://github.com/seu-usuario/legislatech-ai.git
-cd legislatech-ai/legislatech-ai-api
-docker build -t legislatech-ai .
-docker run -p 8000:8000 --env-file .env legislatech-ai
+git clone https://github.com/seu-usuario/sandoval-ai.git
+cd sandoval-ai/sandoval-ai-api
+docker build -t sandoval-ai .
+docker run -p 68000:68000 --env-file .env sandoval-ai
 ```
 
 ### 🔧 Configuração do Banco de Dados
@@ -120,20 +120,20 @@ docker run -p 8000:8000 --env-file .env legislatech-ai
 2. **Configure a extensão**
    ```sql
    CREATE EXTENSION IF NOT EXISTS vector;
-   CREATE DATABASE legislatech;
+   CREATE DATABASE sandoval;
    ```
 
 3. **Configure a string de conexão**
    ```env
-   POSTGRES_CONNECTION_STRING=postgresql://usuario:senha@localhost:5432/legislatech
+   POSTGRES_CONNECTION_STRING=postgresql://usuario:senha@localhost:65432/sandoval
    ```
 
 ### 📚 Documentação Interativa
 
 Após iniciar a aplicação, acesse:
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-- **OpenAPI JSON**: http://localhost:8000/openapi.json
+- **Swagger UI**: http://localhost:68000/docs
+- **ReDoc**: http://localhost:68000/redoc
+- **OpenAPI JSON**: http://localhost:68000/openapi.json
 
 ## 🔧 Tecnologias Utilizadas
 
@@ -172,7 +172,7 @@ Após iniciar a aplicação, acesse:
 - **Cache otimizado** para performance
 
 ```bash
-curl -X POST "http://localhost:8000/v1/responses" \
+curl -X POST "http://localhost:68000/v1/responses" \
      -H "Authorization: Basic $(echo -n 'usuario:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{"input": [{"role": "user", "content": [{"type": "text", "text": "Quais são os direitos do trabalhador em caso de acidente de trabalho?"}]}]}'
@@ -197,7 +197,7 @@ curl -X POST "http://localhost:8000/v1/responses" \
 - **Visualização de relacionamentos**
 
 ```bash
-curl -X GET "http://localhost:8000/grafo/" \
+curl -X GET "http://localhost:68000/grafo/" \
      -H "Authorization: Basic $(echo -n 'usuario:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{
@@ -234,7 +234,7 @@ curl -X GET "http://localhost:8000/grafo/" \
 A API utiliza autenticação HTTP Basic para endpoints sensíveis:
 
 ```bash
-curl -X POST "http://localhost:8000/v1/responses" \
+curl -X POST "http://localhost:68000/v1/responses" \
      -H "Authorization: Basic $(echo -n 'usuario:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{"input": [{"role": "user", "content": [{"type": "text", "text": "teste"}]}]}'
@@ -249,7 +249,7 @@ import requests
 import base64
 
 # Busca sobre direitos trabalhistas
-response = requests.post("http://localhost:8000/v1/responses", 
+response = requests.post("http://localhost:68000/v1/responses", 
     headers={
         "Authorization": "Basic " + base64.b64encode(b"admin:senha").decode(),
         "Content-Type": "application/json"
@@ -276,7 +276,7 @@ print(response.text)  # Resposta em formato SSE
 
 ```python
 # Análise de grafo de uma lei específica
-response = requests.get("http://localhost:8000/grafo/", params={
+response = requests.get("http://localhost:68000/grafo/", params={
     "urls": "https://www.planalto.gov.br/ccivil_03/leis/l8078.htm",
     "profundidade": 2,
     "top_n": 20
@@ -308,7 +308,7 @@ print(response.json())
 OPENAI_API_KEY=sk-your-openai-key-here
 
 # Database
-POSTGRES_CONNECTION_STRING=postgresql://user:pass@host:5432/db
+POSTGRES_CONNECTION_STRING=postgresql://user:pass@host:65432/db
 
 # Authentication
 BASIC_AUTH_USERNAME=admin
@@ -325,18 +325,18 @@ LOG_LEVEL=INFO
 version: '3.8'
 services:
   api:
-    build: ./legislatech-ai-api
+    build: ./sandoval-ai-api
     ports:
-      - "8000:8000"
+      - "68000:68000"
     environment:
-      - POSTGRES_CONNECTION_STRING=postgresql://user:pass@db:5432/legislatech
+      - POSTGRES_CONNECTION_STRING=postgresql://user:pass@db:65432/sandoval
     depends_on:
       - db
   
   db:
     image: pgvector/pgvector:pg15
     environment:
-      POSTGRES_DB: legislatech
+      POSTGRES_DB: sandoval
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
     volumes:
@@ -388,10 +388,10 @@ A Licença MIT permite:
 
 ### Canais de Suporte
 
-- **Website**: [https://legisla.tech/ai](https://legisla.tech/ai)
-- **Email**: suporte@legisla.tech
-- **Issues**: [GitHub Issues](https://github.com/seu-usuario/legislatech-ai/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/seu-usuario/legislatech-ai/discussions)
+- **Website**: [https://sandoval.ai/ai](https://sandoval.ai/ai)
+- **Email**: suporte@sandoval.ai
+- **Issues**: [GitHub Issues](https://github.com/seu-usuario/sandoval-ai/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/seu-usuario/sandoval-ai/discussions)
 
 ### FAQ
 
@@ -409,7 +409,7 @@ A: Acesse [platform.openai.com](https://platform.openai.com) e crie uma conta.
 - **Comunidade open source** que torna projetos como este possíveis
 - **Contribuidores** que dedicam tempo e expertise
 - **Usuários** que fornecem feedback valioso
-- **Equipe Legislatech** pelo desenvolvimento contínuo
+- **AASN** pelo desenvolvimento contínuo do projeto
 
 ## 📈 Roadmap
 
@@ -429,6 +429,6 @@ A: Acesse [platform.openai.com](https://platform.openai.com) e crie uma conta.
 
 ---
 
-**Desenvolvido com ❤️ pela equipe Legislatech**
+**Desenvolvido com ❤️ pela AASN**
 
 *Transformando a forma como interagimos com a legislação brasileira através da inteligência artificial.*

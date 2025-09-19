@@ -1,4 +1,4 @@
-# Legislatech AI API
+# SANDOVAL AI API
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)](https://fastapi.tiangolo.com/)
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -6,7 +6,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-blue.svg)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 
-> **API de inteligência artificial para busca e análise de legislação brasileira** - Desenvolvida com FastAPI e LangChain
+> **API de inteligência artificial para busca e análise de legislação brasileira** - Desenvolvida pela **AASN** com FastAPI e LangChain
 
 ## 🚀 Funcionalidades
 
@@ -45,8 +45,8 @@
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/legislatech-ai.git
-cd legislatech-ai/legislatech-ai-api
+git clone https://github.com/seu-usuario/sandoval-ai.git
+cd sandoval-ai/sandoval-ai-api
 ```
 
 ### 2. Crie um ambiente virtual
@@ -58,8 +58,8 @@ source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate  # Windows
 
 # Alternativa: Conda
-conda create -n legislatech python=3.11
-conda activate legislatech
+conda create -n sandoval python=3.11
+conda activate sandoval
 ```
 
 ### 3. Instale as dependências
@@ -82,7 +82,7 @@ Crie um arquivo `.env` na raiz do projeto:
 OPENAI_API_KEY=sk-your-openai-api-key-here
 
 # === Configurações do Banco de Dados ===
-POSTGRES_CONNECTION_STRING=postgresql://usuario:senha@localhost:5432/legislatech
+POSTGRES_CONNECTION_STRING=postgresql://usuario:senha@localhost:65432/sandoval
 
 # === Autenticação ===
 BASIC_AUTH_USERNAME=admin
@@ -134,11 +134,11 @@ brew services start postgresql
 **Docker:**
 ```bash
 docker run -d \
-  --name postgres-legislatech \
-  -e POSTGRES_DB=legislatech \
+  --name postgres-sandoval \
+  -e POSTGRES_DB=sandoval \
   -e POSTGRES_USER=usuario \
   -e POSTGRES_PASSWORD=senha \
-  -p 5432:5432 \
+  -p 65432:65432 \
   pgvector/pgvector:pg15
 ```
 
@@ -148,12 +148,12 @@ docker run -d \
 sudo -u postgres psql
 
 -- Crie o banco e usuário
-CREATE DATABASE legislatech;
+CREATE DATABASE sandoval;
 CREATE USER usuario WITH PASSWORD 'senha';
-GRANT ALL PRIVILEGES ON DATABASE legislatech TO usuario;
+GRANT ALL PRIVILEGES ON DATABASE sandoval TO usuario;
 
--- Conecte ao banco legislatech
-\c legislatech
+-- Conecte ao banco sandoval
+\c sandoval
 
 -- Instale a extensão pgvector
 CREATE EXTENSION IF NOT EXISTS vector;
@@ -193,35 +193,35 @@ except Exception as e:
 ### Desenvolvimento
 ```bash
 # Com reload automático
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
+uvicorn main:app --host 0.0.0.0 --port 68000 --reload --log-level debug
 
 # Com workers múltiplos
-uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+uvicorn main:app --host 0.0.0.0 --port 68000 --workers 4
 
 # Com configurações customizadas
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload --access-log --log-config log_config.json
+uvicorn main:app --host 0.0.0.0 --port 68000 --reload --access-log --log-config log_config.json
 ```
 
 ### Produção
 ```bash
 # Com Gunicorn (recomendado)
 pip install gunicorn
-gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:68000
 
 # Com Uvicorn
-uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+uvicorn main:app --host 0.0.0.0 --port 68000 --workers 4
 ```
 
 ### Com Docker
 ```bash
 # Build da imagem
-docker build -t legislatech-ai-api .
+docker build -t sandoval-ai-api .
 
 # Execução
-docker run -p 8000:8000 --env-file .env legislatech-ai-api
+docker run -p 68000:68000 --env-file .env sandoval-ai-api
 
 # Com volumes para desenvolvimento
-docker run -p 8000:8000 --env-file .env -v $(pwd):/app legislatech-ai-api
+docker run -p 68000:68000 --env-file .env -v $(pwd):/app sandoval-ai-api
 
 # Com Docker Compose
 docker-compose up -d
@@ -230,13 +230,13 @@ docker-compose up -d
 ## 📚 Documentação da API
 
 ### Endpoints Interativos
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-- **OpenAPI JSON**: http://localhost:8000/openapi.json
+- **Swagger UI**: http://localhost:68000/docs
+- **ReDoc**: http://localhost:68000/redoc
+- **OpenAPI JSON**: http://localhost:68000/openapi.json
 
 ### Health Check
 ```bash
-curl http://localhost:8000/health
+curl http://localhost:68000/health
 ```
 
 ## 🔗 Endpoints Disponíveis
@@ -248,7 +248,7 @@ curl http://localhost:8000/health
 
 **Exemplo de busca:**
 ```bash
-curl -X POST "http://localhost:8000/v1/responses" \
+curl -X POST "http://localhost:68000/v1/responses" \
      -H "Authorization: Basic $(echo -n 'admin:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{
@@ -273,7 +273,7 @@ curl -X POST "http://localhost:8000/v1/responses" \
 
 **Exemplo de roteamento:**
 ```bash
-curl -X POST "http://localhost:8000/v2/responses" \
+curl -X POST "http://localhost:68000/v2/responses" \
      -H "Authorization: Basic $(echo -n 'admin:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{
@@ -298,7 +298,7 @@ curl -X POST "http://localhost:8000/v2/responses" \
 
 **Exemplo de busca genérica:**
 ```bash
-curl -X POST "http://localhost:8000/v3/responses" \
+curl -X POST "http://localhost:68000/v3/responses" \
      -H "Authorization: Basic $(echo -n 'admin:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{
@@ -323,7 +323,7 @@ curl -X POST "http://localhost:8000/v3/responses" \
 
 **Exemplo de crawling:**
 ```bash
-curl -X GET "http://localhost:8000/grafo/?urls=https://www.planalto.gov.br/ccivil_03/leis/l8078.htm&profundidade=2&top_n=20"
+curl -X GET "http://localhost:68000/grafo/?urls=https://www.planalto.gov.br/ccivil_03/leis/l8078.htm&profundidade=2&top_n=20"
 ```
 
 ### Root
@@ -333,7 +333,7 @@ curl -X GET "http://localhost:8000/grafo/?urls=https://www.planalto.gov.br/ccivi
 
 **Exemplo:**
 ```bash
-curl http://localhost:8000/
+curl http://localhost:68000/
 ```
 
 ### 🔐 Autenticação
@@ -341,7 +341,7 @@ curl http://localhost:8000/
 A API utiliza autenticação HTTP Basic para endpoints sensíveis:
 
 ```bash
-curl -X POST "http://localhost:8000/v1/responses" \
+curl -X POST "http://localhost:68000/v1/responses" \
      -H "Authorization: Basic $(echo -n 'usuario:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{"input": [{"role": "user", "content": [{"type": "text", "text": "teste"}]}]}'
@@ -389,21 +389,21 @@ pytest tests/ --cov=. --cov-report=html
 #### 1. Teste de Conectividade
 ```bash
 # Health check
-curl http://localhost:8000/
+curl http://localhost:68000/
 
 # Status da API
-curl http://localhost:8000/health
+curl http://localhost:68000/health
 ```
 
 #### 2. Teste de Autenticação
 ```bash
 # Sem autenticação (deve falhar)
-curl -X POST "http://localhost:8000/v1/responses" \
+curl -X POST "http://localhost:68000/v1/responses" \
      -H "Content-Type: application/json" \
      -d '{"input": [{"role": "user", "content": [{"type": "text", "text": "teste"}]}]}'
 
 # Com autenticação (deve funcionar)
-curl -X POST "http://localhost:8000/v1/responses" \
+curl -X POST "http://localhost:68000/v1/responses" \
      -H "Authorization: Basic $(echo -n 'admin:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{"input": [{"role": "user", "content": [{"type": "text", "text": "teste"}]}]}'
@@ -411,7 +411,7 @@ curl -X POST "http://localhost:8000/v1/responses" \
 
 #### 3. Teste de Busca RAG
 ```bash
-curl -X POST "http://localhost:8000/v1/responses" \
+curl -X POST "http://localhost:68000/v1/responses" \
      -H "Authorization: Basic $(echo -n 'admin:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{
@@ -431,7 +431,7 @@ curl -X POST "http://localhost:8000/v1/responses" \
 
 #### 4. Teste de Streaming
 ```bash
-curl -X POST "http://localhost:8000/v1/responses" \
+curl -X POST "http://localhost:68000/v1/responses" \
      -H "Authorization: Basic $(echo -n 'admin:senha' | base64)" \
      -H "Content-Type: application/json" \
      -d '{
@@ -453,7 +453,7 @@ curl -X POST "http://localhost:8000/v1/responses" \
 ## 📁 Estrutura do Projeto
 
 ```
-legislatech-ai-api/
+sandoval-ai-api/
 ├── main.py              # Aplicação principal FastAPI
 ├── config.py            # Configurações centralizadas
 ├── intent_router.py     # Roteamento inteligente
@@ -540,7 +540,7 @@ sudo apt install redis-server  # Ubuntu
 brew install redis            # macOS
 
 # Configure no .env
-REDIS_URL=redis://localhost:6379
+REDIS_URL=redis://localhost:66379
 CACHE_TTL=3600
 ```
 
@@ -659,10 +659,10 @@ pip install -r requirements.txt --no-cache-dir
 uvicorn main:app --log-level debug
 
 # Logs do sistema
-journalctl -u legislatech-api -f
+journalctl -u sandoval-api -f
 
 # Logs do Docker
-docker logs legislatech-api -f
+docker logs sandoval-api -f
 ```
 
 #### Monitoramento de Performance
@@ -687,9 +687,9 @@ services:
   api:
     build: .
     ports:
-      - "8000:8000"
+      - "68000:68000"
     environment:
-      - POSTGRES_CONNECTION_STRING=postgresql://user:pass@db:5432/legislatech
+      - POSTGRES_CONNECTION_STRING=postgresql://user:pass@db:65432/sandoval
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - BASIC_AUTH_USERNAME=${BASIC_AUTH_USERNAME}
       - BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD}
@@ -699,7 +699,7 @@ services:
       - redis
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:68000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -707,7 +707,7 @@ services:
   db:
     image: pgvector/pgvector:pg15
     environment:
-      POSTGRES_DB: legislatech
+      POSTGRES_DB: sandoval
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
     volumes:
@@ -715,7 +715,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d legislatech"]
+      test: ["CMD-SHELL", "pg_isready -U user -d sandoval"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -732,8 +732,8 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - "80:80"
-      - "443:443"
+      - "680:680"
+      - "6443:6443"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./ssl:/etc/nginx/ssl
@@ -753,12 +753,12 @@ events {
 
 http {
     upstream api {
-        server api:8000;
+        server api:68000;
     }
 
     server {
-        listen 80;
-        server_name api.legisla.tech;
+        listen 680;
+        server_name api.sandoval.ai;
 
         location / {
             proxy_pass http://api;
@@ -774,15 +774,15 @@ http {
 ### Systemd Service
 ```ini
 [Unit]
-Description=Legislatech AI API
+Description=SANDOVAL AI API
 After=network.target
 
 [Service]
 Type=exec
-User=legislatech
-WorkingDirectory=/opt/legislatech-ai-api
-Environment=PATH=/opt/legislatech-ai-api/venv/bin
-ExecStart=/opt/legislatech-ai-api/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+User=sandoval
+WorkingDirectory=/opt/sandoval-ai-api
+Environment=PATH=/opt/sandoval-ai-api/venv/bin
+ExecStart=/opt/sandoval-ai-api/venv/bin/uvicorn main:app --host 0.0.0.0 --port 68000 --workers 4
 Restart=always
 RestartSec=10
 
@@ -795,8 +795,8 @@ WantedBy=multi-user.target
 ### Setup de Desenvolvimento
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/legislatech-ai.git
-cd legislatech-ai/legislatech-ai-api
+git clone https://github.com/seu-usuario/sandoval-ai.git
+cd sandoval-ai/sandoval-ai-api
 
 # Configure o ambiente
 python -m venv venv
@@ -808,7 +808,7 @@ pip install pre-commit
 pre-commit install
 
 # Configure o banco de teste
-createdb legislatech_test
+createdb sandoval_test
 ```
 
 ### Diretrizes de Código
@@ -831,10 +831,10 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](../LICENSE) para
 ## 🆘 Suporte
 
 ### Canais de Ajuda
-- **Documentação**: [docs.legisla.tech](https://docs.legisla.tech)
-- **Email**: suporte@legisla.tech
-- **Issues**: [GitHub Issues](https://github.com/seu-usuario/legislatech-ai/issues)
-- **Discord**: [Comunidade Legislatech](https://discord.gg/legislatech)
+- **Documentação**: [docs.sandoval.ai](https://docs.sandoval.ai)
+- **Email**: suporte@sandoval.ai
+- **Issues**: [GitHub Issues](https://github.com/seu-usuario/sandoval-ai/issues)
+- **Discord**: [Comunidade SANDOVAL](https://discord.gg/sandoval)
 
 ### FAQ
 
@@ -849,6 +849,6 @@ A: Use load balancer, múltiplas instâncias e banco de dados replicado.
 
 ---
 
-**Desenvolvido com ❤️ pela equipe Legislatech**
+**Desenvolvido com ❤️ pela AASN**
 
 *Transformando a pesquisa jurídica através da inteligência artificial.*

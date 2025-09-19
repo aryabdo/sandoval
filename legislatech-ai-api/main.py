@@ -6,8 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from routes import v1, v2, v3, grafo
 
 app = FastAPI(
-    title="RAG & Search API",
-    description="API com endpoints para busca RAG, busca híbrida e crawling de grafos.",
+    title="SANDOVAL AI - RAG & Search API",
+    description="API da SANDOVAL AI, desenvolvida pela AASN, com endpoints para busca RAG, busca híbrida e crawling de grafos.",
     version="1.0.0"
 )
 
@@ -28,4 +28,4 @@ app.include_router(grafo.router, prefix="/grafo", tags=["Grafo Crawler"])
 
 @app.get("/", tags=["Root"])
 def root():
-    return {"message": "Bem-vindo à API de RAG Search + Completion"}
+    return {"message": "Bem-vindo à SANDOVAL AI, desenvolvida pela AASN, para experiências avançadas de RAG Search."}
